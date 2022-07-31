@@ -9,7 +9,7 @@ final class ResponseUtil {
 
     static AwardException getException(Response response) {
         if (response.code() == 404) {
-            return new AwardException("Server is not found!");
+            return new AwardException("Server not found!");
         }
 
         if (response.code() == 403) {
