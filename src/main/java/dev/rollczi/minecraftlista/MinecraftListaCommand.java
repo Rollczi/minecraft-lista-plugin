@@ -4,10 +4,9 @@ import dev.rollczi.litecommands.command.execute.Execute;
 import dev.rollczi.litecommands.command.permission.Permission;
 import dev.rollczi.litecommands.command.section.Section;
 import dev.rollczi.minecraftlista.config.ConfigManager;
-import org.bukkit.command.CommandSender;
 
-@Section(route = "minecraftlista")
-@Permission("minecraftlista.admin")
+@Section(route = "minecraft-lista-plugin")
+@Permission("dev.rollczi.minecraftlista.admin")
 class MinecraftListaCommand {
 
     private final ConfigManager configManager;

@@ -36,8 +36,6 @@ public class AwardService {
                 this.await(pickupAwardResolver.markAsPickedUp(player.getName()));
             }
 
-
-
             return success;
         });
     }

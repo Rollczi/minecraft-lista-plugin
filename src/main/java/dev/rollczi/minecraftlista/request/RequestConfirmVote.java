@@ -14,7 +14,6 @@ class RequestConfirmVote {
 
     private static final String RECEIVE_AWARD_URL = "https://minecraft-lista.pl/api/confirm/%s/";
 
-
     private final OkHttpClient client;
     private final RequestSettings settings;
 
