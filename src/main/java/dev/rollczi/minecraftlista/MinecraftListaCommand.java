@@ -6,7 +6,7 @@ import dev.rollczi.litecommands.command.section.Section;
 import dev.rollczi.minecraftlista.config.ConfigManager;
 
 @Section(route = "minecraft-lista-plugin")
-@Permission("dev.rollczi.minecraftlista.admin")
+@Permission("minecraftlista.admin")
 class MinecraftListaCommand {
 
     private final ConfigManager configManager;

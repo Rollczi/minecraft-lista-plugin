@@ -39,7 +39,7 @@ class RequestConfirmVote {
 
     private boolean handleResponse(Response response) throws IOException {
         if (!response.isSuccessful()) {
-            throw new IOException("Unexpected code " + response);
+            throw ResponseUtil.getException(response);
         }
 
         ResponseBody responseBody = response.body();

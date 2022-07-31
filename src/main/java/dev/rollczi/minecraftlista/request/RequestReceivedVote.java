@@ -45,7 +45,7 @@ class RequestReceivedVote {
     private List<Vote> handleResponse(Response response) {
         try {
             if (!response.isSuccessful()) {
-                throw new IOException("Unexpected code " + response);
+                throw ResponseUtil.getException(response);
             }
 
             ResponseBody responseBody = response.body();

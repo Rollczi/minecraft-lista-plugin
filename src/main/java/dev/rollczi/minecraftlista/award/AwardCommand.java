@@ -6,6 +6,8 @@ import dev.rollczi.litecommands.platform.LiteSender;
 import dev.rollczi.minecraftlista.config.MessagesConfig;
 import org.bukkit.entity.Player;
 
+import java.util.concurrent.CompletionException;
+
 @Section(route = "award")
 public class AwardCommand {
 
@@ -21,6 +23,10 @@ public class AwardCommand {
     public void award(LiteSender liteSender, Player player) {
         this.awardService.applyAward(player).whenComplete((success, throwable) -> {
             if (throwable != null) {
+                if (throwable instanceof CompletionException) {
+                    throwable = throwable.getCause();
+                }
+
                 throwable.printStackTrace();
                 return;
             }
