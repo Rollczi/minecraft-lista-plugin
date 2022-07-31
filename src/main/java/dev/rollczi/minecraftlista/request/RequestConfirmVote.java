@@ -25,7 +25,7 @@ class RequestConfirmVote {
     boolean confirm(Vote vote) {
         Request request = new Request.Builder()
                 .url(String.format(RECEIVE_AWARD_URL, vote.getId()))
-                .header("User-Agent", "MinecraftListaPlugin/1.0.0")
+                .header("User-Agent", "MinecraftListaPlugin/1.1.0")
                 .header("Authorization", settings.apiKey())
                 .post(RequestBody.create("", MediaType.get("application/json")))
                 .build();

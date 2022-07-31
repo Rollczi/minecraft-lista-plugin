@@ -9,4 +9,4 @@ Plugin to reward players for voting for your server on https://minecraft-lista.p
 
 #### Download
 
-https://github.com/Rollczi/minecraft-lista-plugin/releases/tag/v1.0.0
+https://github.com/Rollczi/minecraft-lista-plugin/releases/tag/v1.1.0

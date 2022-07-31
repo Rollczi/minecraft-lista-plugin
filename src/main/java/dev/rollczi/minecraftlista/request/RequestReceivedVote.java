@@ -30,7 +30,7 @@ class RequestReceivedVote {
     List<Vote> receive() {
         Request request = new Request.Builder()
                 .url(String.format(RECEIVE_AWARD_URL, requestSettings.serverId()))
-                .header("User-Agent", "MinecraftListaPlugin/1.0.0")
+                .header("User-Agent", "MinecraftListaPlugin/1.1.0")
                 .header("Authorization", requestSettings.apiKey())
                 .get()
                 .build();
