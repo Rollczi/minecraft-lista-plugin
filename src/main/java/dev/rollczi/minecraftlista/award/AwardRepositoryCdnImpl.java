@@ -20,7 +20,7 @@ public class AwardRepositoryCdnImpl implements AwardRepository, ReloadableConfig
     @Description("# Lista nagród (nagroda jest losowana z listy)")
     List<CommandAward> awards = Arrays.asList(
             new CommandAward(),
-            new CommandAward(Collections.singletonList("give {player} diamond"))
+            new CommandAward(Collections.singletonList("minecraft:give {player} minecraft:diamond_sword 1"))
     );
 
     @Override
@@ -37,7 +37,7 @@ public class AwardRepositoryCdnImpl implements AwardRepository, ReloadableConfig
     static class CommandAward implements Award {
 
         @Description("# Komendy do wykonania dla jednej nagrody")
-        List<String> commands = Arrays.asList("give {player} diamond_sword", "give {player} diamond_pickaxe");
+        List<String> commands = Arrays.asList("minecraft:give {player} minecraft:golden_apple 16", "minecraft:give {player} minecraft:beacon 1");
 
         CommandAward() {}
 
