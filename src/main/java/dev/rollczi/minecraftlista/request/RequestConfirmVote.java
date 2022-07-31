@@ -1,12 +1,12 @@
 package dev.rollczi.minecraftlista.request;
 
+import dev.rollczi.minecraftlista.award.AwardException;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-import org.json.JSONException;
 
 import java.io.IOException;
 
@@ -32,29 +32,25 @@ class RequestConfirmVote {
 
         try (Response response = client.newCall(request).execute()) {
             return this.handleResponse(response);
-        } catch (IOException | JSONException exception) {
-            throw new RuntimeException(exception);
+        } catch (IOException exception) {
+            throw new AwardException(exception);
         }
     }
 
-    private boolean handleResponse(Response response) {
-        try {
-            if (!response.isSuccessful()) {
-                throw new IOException("Unexpected code " + response);
-            }
-
-            ResponseBody responseBody = response.body();
-
-            if (responseBody == null) {
-                throw new IOException("Response body is null");
-            }
-
-            String info = responseBody.string();
-
-            return info.equals("OK");
-        } catch (IOException | JSONException exception) {
-            throw new RuntimeException(exception);
+    private boolean handleResponse(Response response) throws IOException {
+        if (!response.isSuccessful()) {
+            throw new IOException("Unexpected code " + response);
         }
+
+        ResponseBody responseBody = response.body();
+
+        if (responseBody == null) {
+            throw new IOException("Response body is null");
+        }
+
+        String info = responseBody.string();
+
+        return info.equals("OK");
     }
 
 }
