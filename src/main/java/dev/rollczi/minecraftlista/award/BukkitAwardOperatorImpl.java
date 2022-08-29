@@ -26,6 +26,7 @@ public class BukkitAwardOperatorImpl implements AwardOperator {
 
         this.bukkitScheduler.runTask(plugin, () -> {
             if (!player.isOnline()) {
+                completableFuture.complete(false);
                 return;
             }
 

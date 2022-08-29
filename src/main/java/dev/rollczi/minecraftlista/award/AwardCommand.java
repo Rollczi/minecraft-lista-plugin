@@ -21,7 +21,7 @@ public class AwardCommand {
 
     @Execute
     public void award(LiteSender liteSender, Player player) {
-        this.awardService.applyAward(player).whenComplete((success, throwable) -> {
+        this.awardService.applyAward(player).whenComplete((result, throwable) -> {
             if (throwable != null) {
                 if (throwable instanceof CompletionException) {
                     throwable = throwable.getCause();
@@ -31,7 +31,7 @@ public class AwardCommand {
                 return;
             }
 
-            liteSender.sendMessage(success ? messagesConfig.awardSuccess : messagesConfig.awardFailure);
+            liteSender.sendMessage(messagesConfig.getMessage(result));
         });
     }
 

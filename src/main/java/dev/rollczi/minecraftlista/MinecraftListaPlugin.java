@@ -30,7 +30,7 @@ public class MinecraftListaPlugin extends JavaPlugin {
         PickupAwardResolver pickupAwardResolver = HttpAwardResolver.create(config);
         AwardRepository awardRepository = configManager.load(new AwardRepositoryCdnImpl());
         AwardOperator awardOperator = new BukkitAwardOperatorImpl(this.getServer(), this);
-        AwardService awardService = new AwardService(pickupAwardResolver, awardRepository, awardOperator);
+        AwardService awardService = new AwardService(pickupAwardResolver, awardRepository, config, awardOperator);
 
         this.liteCommands = LiteBukkitFactory.builder(this.getServer(), "minecraft-lista-plugin")
                 .contextualBind(Player.class, new BukkitOnlyPlayerContextual(messages.onlyPlayerMessage))

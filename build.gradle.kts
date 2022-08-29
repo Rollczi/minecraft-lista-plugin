@@ -24,10 +24,10 @@ dependencies {
     implementation("org.json:json:20220320")
 
     implementation("dev.rollczi.litecommands:bukkit:2.4.1")
-    implementation("net.dzikoysk:cdn:1.13.23")
+    implementation("net.dzikoysk:cdn:1.14.0")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.2")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
 }
 
 tasks.withType<JavaCompile> {

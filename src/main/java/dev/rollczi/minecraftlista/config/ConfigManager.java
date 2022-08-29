@@ -5,12 +5,14 @@ import net.dzikoysk.cdn.CdnFactory;
 import net.dzikoysk.cdn.reflect.Visibility;
 
 import java.io.File;
+import java.time.Duration;
 import java.util.HashSet;
 import java.util.Set;
 
 public class ConfigManager {
 
     private static final Cdn CDN = CdnFactory.createYamlLike().getSettings()
+            .withComposer(Duration.class, new DurationComposer())
             .withMemberResolver(Visibility.PACKAGE_PRIVATE)
             .build();
 
