@@ -8,17 +8,18 @@ plugins {
 }
 
 group = "dev.rollczi"
-version = "1.2.0-SNAPSHOT"
+version = "1.2.1-SNAPSHOT"
 
 repositories {
     mavenCentral()
 
     maven { url = uri("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") }
+    maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
     maven { url = uri("https://repo.panda-lang.org/releases") }
 }
 
 dependencies {
-    compileOnly("org.spigotmc:spigot-api:1.19.1-R0.1-SNAPSHOT")
+    compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
 
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
     implementation("org.json:json:20220320")

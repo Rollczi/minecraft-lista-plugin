@@ -24,7 +24,7 @@ public class AwardService {
         this.awardRepository = awardRepository;
         this.awardOperator = awardOperator;
         this.coolDown = CacheBuilder.newBuilder()
-                .expireAfterWrite(settings.coolDown())
+                .expireAfterWrite(settings.coolDown().toMillis(), TimeUnit.MILLISECONDS)
                 .build();
     }
 
