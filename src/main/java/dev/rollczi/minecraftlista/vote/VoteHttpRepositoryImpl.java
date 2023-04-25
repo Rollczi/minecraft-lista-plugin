@@ -16,7 +16,7 @@ class VoteHttpRepositoryImpl implements VoteRepository {
     private static final Logger LOGGER = Logger.getLogger(VoteHttpRepositoryImpl.class.getName());
 
     private final ExecutorService executorService = Executors.newFixedThreadPool(4, new ThreadFactoryBuilder()
-            .setNameFormat("http-award-resolver-%d")
+            .setNameFormat("VoteHttpRepositoryImpl-%d")
             .setUncaughtExceptionHandler((thread, throwable) -> LOGGER.log(Level.SEVERE, "Uncaught exception in thread " + thread.getName(), throwable))
             .build()
     );

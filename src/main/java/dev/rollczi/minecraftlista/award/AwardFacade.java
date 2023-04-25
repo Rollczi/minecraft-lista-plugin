@@ -2,6 +2,7 @@ package dev.rollczi.minecraftlista.award;
 
 import dev.rollczi.minecraftlista.config.ConfigManager;
 import dev.rollczi.minecraftlista.vote.VoteFacade;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
@@ -28,7 +29,7 @@ public class AwardFacade {
                 return;
             }
 
-            player.sendMessage(this.getMessage(result));
+            player.sendMessage(ChatColor.translateAlternateColorCodes('&', this.getMessage(result)));
         });
     }
 
