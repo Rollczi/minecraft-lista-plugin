@@ -1,6 +1,5 @@
-package dev.rollczi.minecraftlista.request;
+package dev.rollczi.minecraftlista.vote;
 
-import dev.rollczi.minecraftlista.award.AwardException;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -10,19 +9,19 @@ import okhttp3.ResponseBody;
 
 import java.io.IOException;
 
-class RequestConfirmVote {
+class VoteHttpRequestConfirm {
 
     private static final String RECEIVE_AWARD_URL = "https://minecraft-lista.pl/api/confirm/%s/";
 
     private final OkHttpClient client;
-    private final RequestSettings settings;
+    private final VoteHttpSettings settings;
 
-    RequestConfirmVote(OkHttpClient client, RequestSettings settings) {
+    VoteHttpRequestConfirm(OkHttpClient client, VoteHttpSettings settings) {
         this.client = client;
         this.settings = settings;
     }
 
-    boolean confirm(Vote vote) {
+    boolean confirm(VoteHttpDto vote) {
         Request request = new Request.Builder()
                 .url(String.format(RECEIVE_AWARD_URL, vote.getId()))
                 .header("User-Agent", "MinecraftListaPlugin/1.1.0")
@@ -33,13 +32,13 @@ class RequestConfirmVote {
         try (Response response = client.newCall(request).execute()) {
             return this.handleResponse(response);
         } catch (IOException exception) {
-            throw new AwardException(exception);
+            throw new VoteException(exception);
         }
     }
 
     private boolean handleResponse(Response response) throws IOException {
         if (!response.isSuccessful()) {
-            throw ResponseUtil.getException(response);
+            throw VoteException.newException(response);
         }
 
         ResponseBody responseBody = response.body();

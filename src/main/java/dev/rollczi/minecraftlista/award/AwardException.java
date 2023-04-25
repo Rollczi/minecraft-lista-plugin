@@ -1,6 +1,6 @@
 package dev.rollczi.minecraftlista.award;
 
-public class AwardException extends RuntimeException {
+class AwardException extends RuntimeException {
 
     public AwardException() {
     }

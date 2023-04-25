@@ -1,5 +1,6 @@
 package dev.rollczi.minecraftlista.award;
 
+import org.bukkit.Bukkit;
 import org.bukkit.Server;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
@@ -8,15 +9,15 @@ import org.bukkit.scheduler.BukkitScheduler;
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
-public class BukkitAwardOperatorImpl implements AwardOperator {
+class BukkitAwardOperatorImpl implements AwardOperator {
 
     private final BukkitScheduler bukkitScheduler;
     private final Server server;
     private final Plugin plugin;
 
-    public BukkitAwardOperatorImpl(Server server, Plugin plugin) {
-        this.bukkitScheduler = server.getScheduler();
-        this.server = server;
+    BukkitAwardOperatorImpl(Plugin plugin) {
+        this.bukkitScheduler = Bukkit.getScheduler();
+        this.server = Bukkit.getServer();
         this.plugin = plugin;
     }
 

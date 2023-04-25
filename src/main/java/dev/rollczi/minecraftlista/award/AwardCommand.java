@@ -1,38 +1,21 @@
 package dev.rollczi.minecraftlista.award;
 
 import dev.rollczi.litecommands.command.execute.Execute;
-import dev.rollczi.litecommands.command.section.Section;
-import dev.rollczi.litecommands.platform.LiteSender;
-import dev.rollczi.minecraftlista.config.MessagesConfig;
+import dev.rollczi.litecommands.command.route.Route;
 import org.bukkit.entity.Player;
 
-import java.util.concurrent.CompletionException;
-
-@Section(route = "award")
+@Route(name = "award")
 public class AwardCommand {
 
-    private final AwardService awardService;
-    private final MessagesConfig messagesConfig;
+    private final AwardFacade awardFacade;
 
-    public AwardCommand(AwardService awardService, MessagesConfig messagesConfig) {
-        this.awardService = awardService;
-        this.messagesConfig = messagesConfig;
+    public AwardCommand(AwardFacade awardFacade) {
+        this.awardFacade = awardFacade;
     }
 
     @Execute
-    public void award(LiteSender liteSender, Player player) {
-        this.awardService.applyAward(player).whenComplete((result, throwable) -> {
-            if (throwable != null) {
-                if (throwable instanceof CompletionException) {
-                    throwable = throwable.getCause();
-                }
-
-                throwable.printStackTrace();
-                return;
-            }
-
-            liteSender.sendMessage(messagesConfig.getMessage(result));
-        });
+    public void award(Player player) {
+        awardFacade.applyAward(player);
     }
 
 }

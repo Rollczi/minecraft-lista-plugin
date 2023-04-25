@@ -4,7 +4,7 @@ import org.bukkit.entity.Player;
 
 import java.util.concurrent.CompletableFuture;
 
-public interface AwardOperator {
+interface AwardOperator {
 
     CompletableFuture<Boolean> applyAward(Award award, Player player);
 

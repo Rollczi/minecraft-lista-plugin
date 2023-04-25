@@ -2,14 +2,14 @@ package dev.rollczi.minecraftlista;
 
 import dev.rollczi.minecraftlista.award.AwardSettings;
 import dev.rollczi.minecraftlista.config.ReloadableConfig;
-import dev.rollczi.minecraftlista.request.RequestSettings;
+import dev.rollczi.minecraftlista.vote.VoteHttpSettings;
 import net.dzikoysk.cdn.source.Resource;
 import net.dzikoysk.cdn.source.Source;
 
 import java.io.File;
 import java.time.Duration;
 
-class MinecraftListaConfig implements ReloadableConfig, AwardSettings, RequestSettings {
+class MinecraftListaConfig implements ReloadableConfig, AwardSettings, VoteHttpSettings {
 
     String command = "award";
 

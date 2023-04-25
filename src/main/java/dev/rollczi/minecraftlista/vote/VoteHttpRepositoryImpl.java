@@ -1,7 +1,6 @@
-package dev.rollczi.minecraftlista.request;
+package dev.rollczi.minecraftlista.vote;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import dev.rollczi.minecraftlista.award.PickupAwardResolver;
 import okhttp3.OkHttpClient;
 
 import java.util.List;
@@ -12,9 +11,9 @@ import java.util.concurrent.Executors;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class HttpAwardResolver implements PickupAwardResolver {
+class VoteHttpRepositoryImpl implements VoteRepository {
 
-    private static final Logger LOGGER = Logger.getLogger(HttpAwardResolver.class.getName());
+    private static final Logger LOGGER = Logger.getLogger(VoteHttpRepositoryImpl.class.getName());
 
     private final ExecutorService executorService = Executors.newFixedThreadPool(4, new ThreadFactoryBuilder()
             .setNameFormat("http-award-resolver-%d")
@@ -22,23 +21,23 @@ public class HttpAwardResolver implements PickupAwardResolver {
             .build()
     );
 
-    private final RequestReceivedVote requestReceivedVote;
-    private final RequestConfirmVote requestConfirmVote;
+    private final VoteHttpRequestReceived requestReceivedVote;
+    private final VoteHttpRequestConfirm requestConfirmVote;
 
-    private HttpAwardResolver(RequestReceivedVote requestReceivedVote, RequestConfirmVote requestConfirmVote) {
+    private VoteHttpRepositoryImpl(VoteHttpRequestReceived requestReceivedVote, VoteHttpRequestConfirm requestConfirmVote) {
         this.requestReceivedVote = requestReceivedVote;
         this.requestConfirmVote = requestConfirmVote;
     }
 
     @Override
-    public CompletableFuture<Boolean> canPickup(String playerName) {
+    public CompletableFuture<Boolean> hasValidateVote(String playerName) {
         return CompletableFuture.supplyAsync(() -> this.findVote(playerName).isPresent(), executorService);
     }
 
     @Override
-    public CompletableFuture<Void> markAsPickedUp(String playerName) {
+    public CompletableFuture<Void> markVoteAsInvalidate(String playerName) {
         return CompletableFuture.runAsync(() -> {
-            Optional<Vote> vote = this.findVote(playerName);
+            Optional<VoteHttpDto> vote = this.findVote(playerName);
 
             if (!vote.isPresent()) {
                 return;
@@ -48,10 +47,10 @@ public class HttpAwardResolver implements PickupAwardResolver {
         }, executorService);
     }
 
-    private Optional<Vote> findVote(String playerName) {
-        List<Vote> received = requestReceivedVote.receive();
+    private Optional<VoteHttpDto> findVote(String playerName) {
+        List<VoteHttpDto> received = requestReceivedVote.receive();
 
-        for (Vote vote : received) {
+        for (VoteHttpDto vote : received) {
             if (vote.getPlayerName().equals(playerName)) {
                 return Optional.of(vote);
             }
@@ -60,12 +59,12 @@ public class HttpAwardResolver implements PickupAwardResolver {
         return Optional.empty();
     }
 
-    public static HttpAwardResolver create(RequestSettings settings) {
+    public static VoteHttpRepositoryImpl create(VoteHttpSettings settings) {
         OkHttpClient okHttpClient = new OkHttpClient();
-        RequestReceivedVote requestReceivedVote = new RequestReceivedVote(okHttpClient, settings);
-        RequestConfirmVote requestConfirmVote = new RequestConfirmVote(okHttpClient, settings);
+        VoteHttpRequestReceived requestReceivedVote = new VoteHttpRequestReceived(okHttpClient, settings);
+        VoteHttpRequestConfirm requestConfirmVote = new VoteHttpRequestConfirm(okHttpClient, settings);
 
-        return new HttpAwardResolver(requestReceivedVote, requestConfirmVote);
+        return new VoteHttpRepositoryImpl(requestReceivedVote, requestConfirmVote);
     }
 
 }

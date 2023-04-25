@@ -8,7 +8,7 @@ import panda.std.Result;
 import java.time.Duration;
 import java.util.Locale;
 
-public class DurationComposer implements Composer<Duration>, SimpleSerializer<Duration>, SimpleDeserializer<Duration> {
+class DurationComposer implements Composer<Duration>, SimpleSerializer<Duration>, SimpleDeserializer<Duration> {
 
     @Override
     public Result<Duration, Exception> deserialize(String duration) {

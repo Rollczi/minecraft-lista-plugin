@@ -4,7 +4,7 @@ import org.bukkit.entity.Player;
 
 import java.util.List;
 
-public interface Award {
+interface Award {
 
     List<String> getCommands(Player player);
 

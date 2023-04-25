@@ -2,6 +2,7 @@ package dev.rollczi.minecraftlista.award;
 
 import com.google.common.cache.Cache;
 import com.google.common.cache.CacheBuilder;
+import dev.rollczi.minecraftlista.vote.VoteFacade;
 import dev.rollczi.minecraftlista.util.RandomUtil;
 import org.bukkit.entity.Player;
 
@@ -12,15 +13,15 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-public class AwardService {
+class AwardService {
 
-    private final PickupAwardResolver pickupAwardResolver;
+    private final VoteFacade voteFacade;
     private final AwardRepository awardRepository;
     private final AwardOperator awardOperator;
     private final Cache<UUID, Boolean> coolDown;
 
-    public AwardService(PickupAwardResolver pickupAwardResolver, AwardRepository awardRepository, AwardSettings settings, AwardOperator awardOperator) {
-        this.pickupAwardResolver = pickupAwardResolver;
+    public AwardService(VoteFacade voteFacade, AwardRepository awardRepository, AwardSettings settings, AwardOperator awardOperator) {
+        this.voteFacade = voteFacade;
         this.awardRepository = awardRepository;
         this.awardOperator = awardOperator;
         this.coolDown = CacheBuilder.newBuilder()
@@ -37,7 +38,7 @@ public class AwardService {
 
         this.coolDown.put(player.getUniqueId(), true);
 
-        return pickupAwardResolver.canPickup(player.getName()).thenApplyAsync(canPickup -> {
+        return voteFacade.hasValidateVote(player.getName()).thenApplyAsync(canPickup -> {
             if (!canPickup) {
                 return Result.FAILURE;
             }
@@ -48,7 +49,7 @@ public class AwardService {
             boolean success = this.await(awardOperator.applyAward(random, player));
 
             if (success) {
-                this.await(pickupAwardResolver.markAsPickedUp(player.getName()));
+                this.await(voteFacade.markVoteAsInvalidate(player.getName()));
             }
 
             return success ? Result.SUCCESS : Result.FAILURE;

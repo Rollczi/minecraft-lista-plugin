@@ -1,11 +1,11 @@
-package dev.rollczi.minecraftlista.request;
+package dev.rollczi.minecraftlista.vote;
 
-class Vote {
+class VoteHttpDto {
 
     private final long id;
     private final String playerName;
 
-    Vote(long id, String playerName) {
+    VoteHttpDto(long id, String playerName) {
         this.id = id;
         this.playerName = playerName;
     }

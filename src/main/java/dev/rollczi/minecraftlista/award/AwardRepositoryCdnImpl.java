@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
-public class AwardRepositoryCdnImpl implements AwardRepository, ReloadableConfig {
+class AwardRepositoryCdnImpl implements AwardRepository, ReloadableConfig {
 
     @Description("# Lista nagród (nagroda jest losowana z listy)")
     List<CommandAward> awards = Arrays.asList(
