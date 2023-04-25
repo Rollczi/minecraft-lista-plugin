@@ -16,19 +16,20 @@ repositories {
     maven { url = uri("https://hub.spigotmc.org/nexus/content/repositories/snapshots/") }
     maven { url = uri("https://oss.sonatype.org/content/repositories/snapshots") }
     maven { url = uri("https://repo.panda-lang.org/releases") }
+    maven { url = uri("https://repository.minecodes.pl/snapshots") }
 }
 
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
 
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
-    implementation("org.json:json:20220320")
+    implementation("org.json:json:20220924")
 
-    implementation("dev.rollczi.litecommands:bukkit:2.4.1")
+    implementation("dev.rollczi.litecommands:bukkit:2.8.7")
     implementation("net.dzikoysk:cdn:1.14.0")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.0")
-    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
 }
 
 tasks.withType<JavaCompile> {

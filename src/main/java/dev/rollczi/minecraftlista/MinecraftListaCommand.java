@@ -1,11 +1,12 @@
 package dev.rollczi.minecraftlista;
 
+import dev.rollczi.litecommands.command.async.Async;
 import dev.rollczi.litecommands.command.execute.Execute;
 import dev.rollczi.litecommands.command.permission.Permission;
-import dev.rollczi.litecommands.command.section.Section;
+import dev.rollczi.litecommands.command.route.Route;
 import dev.rollczi.minecraftlista.config.ConfigManager;
 
-@Section(route = "minecraft-lista-plugin")
+@Route(name = "minecraft-lista-plugin")
 @Permission("minecraftlista.admin")
 class MinecraftListaCommand {
 
@@ -15,6 +16,7 @@ class MinecraftListaCommand {
         this.configManager = configManager;
     }
 
+    @Async
     @Execute(route = "reload")
     String execute() {
         this.configManager.reload();
