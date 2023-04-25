@@ -38,7 +38,9 @@ class AwardService {
 
         this.coolDown.put(player.getUniqueId(), true);
 
-        return voteFacade.hasValidateVote(player.getName()).thenApplyAsync(canPickup -> {
+        return CompletableFuture.supplyAsync(() -> {
+            Boolean canPickup = this.await(voteFacade.hasValidateVote(player.getName()));
+
             if (!canPickup) {
                 return Result.FAILURE;
             }
@@ -58,7 +60,7 @@ class AwardService {
 
     private <T> T await(CompletableFuture<T> future) {
         try {
-            return future.get(15, TimeUnit.SECONDS);
+            return future.get(10, TimeUnit.SECONDS);
         }
         catch (ExecutionException exception) {
             throw new AwardException(exception.getCause());
