@@ -16,6 +16,7 @@ class DurationComposerTest {
         assertEquals(1, composer.deserialize("1h").get().toHours());
         assertEquals(1, composer.deserialize("1m").get().toMinutes());
         assertEquals(1, composer.deserialize("1s").get().getSeconds());
+        assertEquals(1, composer.deserialize("1sec").get().getSeconds());
         assertEquals(1, composer.deserialize("1ms").get().toMillis());
         assertEquals(1, composer.deserialize("1us").get().toNanos() / 1000);
         assertEquals(1, composer.deserialize("1ns").get().toNanos());
