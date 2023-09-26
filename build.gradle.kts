@@ -8,7 +8,7 @@ plugins {
 }
 
 group = "dev.rollczi"
-version = "1.2.1-SNAPSHOT"
+version = "1.3.0"
 
 repositories {
     mavenCentral()
@@ -25,7 +25,7 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
     implementation("org.json:json:20220924")
 
-    implementation("dev.rollczi.litecommands:bukkit:2.8.7")
+    implementation("dev.rollczi.litecommands:bukkit:2.8.9")
     implementation("net.dzikoysk:cdn:1.14.0")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
