@@ -1,21 +1,24 @@
 package dev.rollczi.minecraftlista.vote;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonParseException;
+import com.google.gson.reflect.TypeToken;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import okhttp3.ResponseBody;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 class VoteHttpRequestReceived {
 
+    private static final Type RESPONSE_TYPE = new TypeToken<ArrayList<VoteHttpDto>>(){}.getType();
     private static final String RECEIVE_AWARD_URL = "https://minecraft-lista.pl/api/receive/%s";
 
+    private final Gson gson = new Gson();
     private final OkHttpClient client;
     private final VoteHttpSettings voteHttpSettings;
 
@@ -34,7 +37,8 @@ class VoteHttpRequestReceived {
 
         try (Response response = client.newCall(request).execute()) {
             return this.handleResponse(response);
-        } catch (IOException | JSONException exception) {
+        }
+        catch (IOException exception) {
             throw new VoteException(exception);
         }
     }
@@ -51,27 +55,10 @@ class VoteHttpRequestReceived {
                 throw new IOException("Response body is null");
             }
 
-            JSONArray list = new JSONArray(responseBody.string());
-            List<VoteHttpDto> votes = new ArrayList<>();
-
-            for (Object vote : list) {
-                votes.add(this.extractVote(vote));
-            }
-
-            return votes;
-        } catch (IOException | JSONException exception) {
+            return gson.fromJson(responseBody.string(), RESPONSE_TYPE);
+        }
+        catch (IOException | JsonParseException exception) {
             throw new VoteException(exception);
         }
     }
-
-    private VoteHttpDto extractVote(Object obj) {
-        if (!(obj instanceof JSONObject)) {
-            throw new JSONException("Unexpected type " + obj.getClass());
-        }
-
-        JSONObject jsonObject = (JSONObject) obj;
-
-        return new VoteHttpDto(jsonObject.getInt("id"), jsonObject.getString("nickname"));
-    }
-
 }
