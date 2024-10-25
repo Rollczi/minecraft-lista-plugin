@@ -22,7 +22,7 @@ repositories {
 dependencies {
     compileOnly("org.spigotmc:spigot-api:1.8.8-R0.1-SNAPSHOT")
 
-    implementation("com.squareup.okhttp3:okhttp:4.10.0")
+    implementation("com.squareup.okhttp3:okhttp:4.12.0")
 
     implementation("dev.rollczi.litecommands:bukkit:2.8.9")
     implementation("net.dzikoysk:cdn:1.14.0")
