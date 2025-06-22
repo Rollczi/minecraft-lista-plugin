@@ -25,7 +25,7 @@ dependencies {
     implementation("com.squareup.okhttp3:okhttp:4.10.0")
 
     implementation("dev.rollczi.litecommands:bukkit:2.8.9")
-    implementation("net.dzikoysk:cdn:1.14.0")
+    implementation("net.dzikoysk:cdn:1.14.9")
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
