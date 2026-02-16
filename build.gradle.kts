@@ -27,7 +27,7 @@ dependencies {
     implementation("dev.rollczi.litecommands:bukkit:2.8.9")
     implementation("net.dzikoysk:cdn:1.14.0")
 
-    testImplementation("org.junit.jupiter:junit-jupiter-api:5.9.2")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.14.3")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.9.2")
 }
 
